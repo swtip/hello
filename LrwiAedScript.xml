@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding="utf-8" ?>
+
+<!DOCTYPE AED [
+
+<!--
+	Application Error Definition DTD.
+	For Loadrunner 7.5 and up.
+	Mercury Interactive Inc., 2001
+-->
+
+<!--
+	'Text' element definition
+	Contains only parsed character data with no attributes
+-->
+<!ELEMENT Text (#PCDATA)>
+
+<!--
+	'Prefix' element definition
+	Contains only parsed character data with no attributes
+-->
+<!ELEMENT Prefix (#PCDATA)>
+
+<!--
+	'Suffix' element definition
+	Contains only parsed character data with no attributes
+-->
+<!ELEMENT Suffix (#PCDATA)>
+
+<!--
+	'Rule' element definition. Must include:
+		one 'Text' element and afterwards an optional 'Prefix' element and then
+		an optional 'Suffix' element
+
+		or
+
+		'one 'Prefix' and afterwards one 'Suffix' element.
+	Attributes:
+		Name			Rule name, required.
+		Level			Rule level, as defined in leveltype entity definition.
+						Defualts to 'error'.
+		FailIfNotFound	Boolean flag, detrmines whether the script should fail
+						if rule is not found. Defaults to 'false'.
+		MatchCase		Boolean flag indicating whether the comparison should be
+						done Case Sensitive or nor , default is true.
+		UseText			Boolean flag indicating whether the catch should be
+						matched in 'Text', 'Prefix' and 'Suffix'. Defualts to 'true'.
+		Type			What is the type of the rule , can be a regular rule that go over data 
+						from the net (value = 'std') or an alert rule that go over alerts that are 
+						being displayed (value = 'alert'). default is 'std'.
+-->
+<!ELEMENT Rule ((Text,Prefix?,Suffix?)|(Prefix,Suffix))>
+<!ATTLIST Rule
+	Name			CDATA				#REQUIRED
+	Level			(disabled|error)	'error'
+	FailIfNotFound	(true|false)		'false'
+	MatchCase		(true|false)		'true'
+	UseText			(true|false)		'true'
+	Type			(std|alert)			#IMPLIED
+	>
+
+<!--
+	'Application' element definition. Must include at least one 'Rule' element inside.
+	Attributes:
+		Name			Application name, required.
+		Enabled			Boolean flag indicating whether the application is enabled.
+						Defaults to 'true'.
+-->
+<!ELEMENT Application (Rule*)>
+<!ATTLIST Application
+	Name		CDATA			#REQUIRED
+	Enabled		(true|false)	'true'
+	StampTime	CDATA			#REQUIRED
+	StampHost	CDATA			#REQUIRED
+	>
+
+<!--
+	'AED' (root) element definition. Must include at least one 'Application' element inside.
+	Attributes:
+		LrVersion				Loadrunner version, optional.
+		FileVersionInstallation	Corresponding installation file level, optional.
+		FileVersionDefaults		OBSOLETE.  Was corresponding defaults file level, optional.
+		Saved					The file has been saved, optional.
+-->
+<!ELEMENT AED (Application*)>
+<!ATTLIST AED
+	LrVersion				CDATA					#IMPLIED
+	FileVersionInstallation	CDATA					#IMPLIED
+	Saved					(true|false)			'false'
+	>
+
+]>
+<AED>
+  <Application Name="Application_1" Enabled="true" StampTime="1543398625" StampHost="" />
+</AED>
