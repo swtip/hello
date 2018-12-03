@@ -1,6 +1,6 @@
 Action()
 {
-   //Tis is my first git commit
+   //Tis is my first git commit and push
 	web_url("blazedemo.com", 
 		"URL=http://blazedemo.com/", 
 		"Resource=0", 
